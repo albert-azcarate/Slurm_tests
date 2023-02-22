@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH --job-name=sbatch_test
+#SBATCH --output=logs/sbatch_%j.out
+#SBATCH --error=logs/sbatch_%j.err
+#SBATCH --time=00:00:08
+#SBATCH --ntasks=1
+##SBATCH --ntasks-per-node=1
+##SBATCH --nodes=1
+##SBATCH --cpus-per-task=1
+
+#check if mt or power because they have different python paths
+if [[ "$BSC_MACHINE" == "nvidia" || "$BSC_MACHINE" == "power" || "$BSC_MACHINE" == "starlife" ]]; then
+    srun ./sbatch_test_mt.py
+else
+    srun ./sbatch_test.py
+fi
+
+exit 0

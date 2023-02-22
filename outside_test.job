@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name=outside_test
+#SBATCH --output=logs/outside_%N_%j.out
+#SBATCH --error=logs/outside_%N_%j.err
+#SBATCH --time=00:00:30
+#SBATCH --ntasks=1
+##SBATCH --ntasks-per-node=1
+##SBATCH --nodes=1
+##SBATCH --cpus-per-task=1
+
+#check if mt or power because they have different python paths
+if [[ "$BSC_MACHINE" == "nvidia" || "$BSC_MACHINE" == "power" || "$BSC_MACHINE" == "starlife" ]]; then
+    srun ./outside_test_mt.py
+else 
+    srun ./outside_test.py
+fi
+exit 0

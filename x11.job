@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name=test_mpi
+#SBATCH --output=logs/x11_%j.out
+#SBATCH --error=logs/x11_%j.err
+#SBATCH --time=00:05:00
+#SBATCH --ntasks=48
+#SBATCH --x11=all
+##SBATCH --ntasks-per-node=24
+##SBATCH --nodes=4
+##SBATCH --cpus-per-task=2
+#SBATCH --qos=benchmark
+
+/gpfs/projects/usertest/usertest/hpc-tc/SLURM/xclock.sh
